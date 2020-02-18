@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.butterfly.productspike.mapper.ProductMapper">
+    <sql id="baseSql">
+        id,
+        bussiness_id,
+        product_name,
+        product_price,
+        product_amount,
+        start_time,
+        end_time
+    </sql>
+    <select id="queryAll" resultType="com.butterfly.productspike.bean.Product">
+        SELECT
+            <include refid="baseSql"/>
+        FROM product;
+    </select>
+
+    <select id="queryById" resultType="com.butterfly.productspike.bean.Product">
+        SELECT
+            <include refid="baseSql"/>
+        FROM product
+        where bussiness_id = #{bussinessId}
+    </select>
+
+    <update id="reduceProduct">
+        UPDATE product
+        SET   product_amount = product_amount - 1
+        WHERE bussiness_id = #{bussinessId}
+        AND   start_time <![CDATA[ <= ]]> #{seckillTime}
+        AND   end_time   <![CDATA[ >= ]]> #{seckillTime}
+        AND   product_amount > 0
+    </update>
+
+</mapper>

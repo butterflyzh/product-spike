@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.butterfly.productspike.mapper.SuccessSeckillMapper">
+
+    <insert id="insertSuccessSeckill" useGeneratedKeys="true" keyProperty="id" parameterType="com.butterfly.productspike.bean.SuccessSeckill">
+        INSERT INTO sucess_seckill(
+            user_phone,
+            state,
+            bussiness_id,
+            create_time
+        ) VALUES (
+            #{userPhone},
+            #{state},
+            #{bussinessId},
+            #{createTime}
+        )
+    </insert>
+
+    <select id="querySuccessSeckill" resultType="com.butterfly.productspike.bean.SuccessSeckill">
+        SELECT  id,
+                user_phone,
+                state,
+                bussiness_id,
+                create_time
+        FROM sucess_seckill
+        WHERE user_phone = #{userPhone}
+    </select>
+</mapper>
